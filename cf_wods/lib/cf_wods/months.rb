@@ -10,6 +10,7 @@ class CfWods::Months
   end
   
   def self.all
+    CfWods::Scraper.scrape_months if @@all.empty? 
     @@all
   end
   
