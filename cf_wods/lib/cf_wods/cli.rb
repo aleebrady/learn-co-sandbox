@@ -29,9 +29,11 @@ class CfWods::CLI
   
   def show_workouts_for(month_selected)
     month = @months[month_selected - 1]
+    month.get_workouts
     puts "Here are the workouts for #{month.name}"
-    #CfWods::Workouts.all.each.each.with_index do |workout| puts worout.name 
-    #get_user_workout
+    month.workouts.each.with_index(1) do |workout, i|
+      puts "#{i}. #{workout.name}"
+    end
   end
   
 end

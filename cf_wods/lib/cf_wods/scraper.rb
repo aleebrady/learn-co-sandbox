@@ -9,5 +9,9 @@ class CfWods::Scraper
     end
   end
   
+  def self.scrape_workouts(month)
+    CfWods::Workouts.new("Wednesday 200819", month)
+    CfWods::Workouts.new("Tuesday 200818", month)
+  end
   
 end
