@@ -46,7 +46,7 @@ class CfWods::CLI
     puts "Pick a workout to see the movements."
     input = gets.strip
     workout = month.workouts[input.to_i - 1]
-    #binding.pry
+    #b binding.pry
     workout.get_workout_info
     show_workout_details(workout)
   end

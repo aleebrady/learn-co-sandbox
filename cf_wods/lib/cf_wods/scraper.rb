@@ -32,4 +32,16 @@ class CfWods::Scraper
     end
   end
   
+  def self.scrape_details_2(workout)
+    url = "https://wodwell.com/wods/?sort=popular"
+    doc = Nokogiri::HTML(open(url))
+    
+    workouts = doc.css("div.wod-description")
+    workout_detail = workouts.find do |w|
+      workout.name == w.css("h2.wod-title").text
+    end
+    
+    workout.info << workout_detail.inner_text.gsub(/\s+/," ")
+  end
+  
 end
