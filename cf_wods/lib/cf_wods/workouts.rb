@@ -22,7 +22,7 @@ class CfWods::Workouts
   end
   
   def get_workout_info
-    CfWods::Scraper.scrape_info(self) if @info.empty?
+    CfWods::Scraper.scrape_details(self) if @info.empty?
   end
   
 end

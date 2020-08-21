@@ -40,10 +40,9 @@ class CfWods::CLI
       puts "#{i}. #{workout.name}"
     end
     get_user_workout(month)
-    binding.pry
   end
   
-  def get_user_workout(month)
+    def get_user_workout(month)
     puts "Pick a workout to see the movements."
     input = gets.strip
     workout = month.workouts[input.to_i - 1]
@@ -52,12 +51,12 @@ class CfWods::CLI
   end
   
   def show_workout_details(workout)
-    puts workouts.name 
-    event.info.each {|i| puts "- #{i}"}
+    puts workout.name 
+    workout.info.each {|i| puts "- #{i}"}
   end
   
   def what_to_do_now? 
-    puts "Would you like to see more workouts? Type 'exit' to rest"
+    puts "Would you like to see more workouts? Type 'exit' to rest and recover"
     @input = gets.strip
   end
   

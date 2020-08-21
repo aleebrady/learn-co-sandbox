@@ -3,6 +3,7 @@ class CfWods::Scraper
   def self.scrape_months
     doc = Nokogiri::HTML(open("https://www.crossfit.com/workout"))
     months = doc.css("select#monthFilter option")
+    months.shift
     months.each do |m|
       name = m.text
       CfWods::Months.new(name)
@@ -10,24 +11,24 @@ class CfWods::Scraper
   end
   
   def self.scrape_workouts(month)
-    url = "https://www.crossfit.com/workout"
+    url = "https://wodwell.com/wods/?sort=popular"
     doc = Nokogiri::HTML(open(url))
     
-    workouts = doc.css(".show")
+    workouts = doc.css("div.wod-description")
     workouts.each do |w|
-      title = w.css("a").attr("href").text
-      CfWods::Workouts.new(name, month)
+      title = w.css("h2.wod-title").text
+      CfWods::Workouts.new(title, month)
     end
   end
   
    def self.scrape_details(workout)
-     url = "https://www.crossfit.com/workout"
+     url = "https://wodwell.com/wods/?sort=popular"
      doc = Nokogiri::HTML(open(url))
     
-    wo = doc.css("div.col-sm-6 p")
+    wo = doc.css("div.wod-description")
     wo.each do |e|
       details = e.text.strip 
-      workouts.info << details
+      workout.info << details
     end
   end
   
