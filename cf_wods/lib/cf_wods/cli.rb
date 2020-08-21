@@ -2,9 +2,14 @@ class CfWods::CLI
   
   def call 
     puts "\nWelcome to the Workout of the Day!\n"
+    @input = ""
+    until @input == "exit"
     get_months 
     list_months
     get_user_month
+    what_to_do_now?
+  end
+  exit
   end
   
   def get_months
@@ -34,6 +39,30 @@ class CfWods::CLI
     month.workouts.each.with_index(1) do |workout, i|
       puts "#{i}. #{workout.name}"
     end
+    get_user_workout(month)
+    binding.pry
+  end
+  
+  def get_user_workout(month)
+    puts "Pick a workout to see the movements."
+    input = gets.strip
+    workout = month.workouts[input.to_i - 1]
+    workout.get_workout_info
+    show_workout_details(workout)
+  end
+  
+  def show_workout_details(workout)
+    puts workouts.name 
+    event.info.each {|i| puts "- #{i}"}
+  end
+  
+  def what_to_do_now? 
+    puts "Would you like to see more workouts? Type 'exit' to rest"
+    @input = gets.strip
+  end
+  
+  def exit
+    puts "See you next time on WODs. Enjoy your recovery!"
   end
   
 end
