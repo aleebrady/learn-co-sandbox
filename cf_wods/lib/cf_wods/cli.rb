@@ -1,7 +1,7 @@
 class CfWods::CLI
   
   def call 
-    puts "\nWelcome to the Workout of the Day!\n"
+    puts "\nWelcome to Hero Workouts!\n"
     @input = ""
     until @input == "exit"
     get_months 
@@ -17,15 +17,15 @@ class CfWods::CLI
   end
   
   def list_months
-    puts "Pick a month to see workouts."
+    puts "\nPick a number to see workouts for the month:\n"
     @months.each.with_index(1) do |month, index| 
-    puts "#{index}. #{month.name}" #changed index to -1 since it was not lining up with the correct month from scrape. need to remove "month"
+    puts "\n#{index}. #{month.name}\n" 
   end
   end
   
   def get_user_month
     month_selected = gets.strip.to_i
-    show_workouts_for(month_selected) if valid_input(month_selected, @months) #added + 1 to month selected to correspond to correct month number
+    show_workouts_for(month_selected) if valid_input(month_selected, @months)
   end
   
   def valid_input(input, data)
@@ -35,7 +35,7 @@ class CfWods::CLI
   def show_workouts_for(month_selected)
     month = @months[month_selected - 1]
     month.get_workouts
-    puts "Here are the workouts for #{month.name}"
+    puts "\nHere are the workouts for #{month.name}:\n"
     month.workouts.each.with_index(1) do |workout, i|
       puts "#{i}. #{workout.name}"
     end
@@ -46,6 +46,7 @@ class CfWods::CLI
     puts "Pick a workout to see the movements."
     input = gets.strip
     workout = month.workouts[input.to_i - 1]
+    #binding.pry
     workout.get_workout_info
     show_workout_details(workout)
   end
@@ -56,12 +57,12 @@ class CfWods::CLI
   end
   
   def what_to_do_now? 
-    puts "Would you like to see more workouts? Type 'exit' to rest and recover"
+    puts "\nWant to see more workouts? Press enter or type 'exit' to rest and recover\n"
     @input = gets.strip
   end
   
   def exit
-    puts "See you next time on WODs. Enjoy your recovery!"
+    puts "\nSee you next time on Hero Workouts. Enjoy your recovery!\n"
   end
   
 end

@@ -27,7 +27,7 @@ class CfWods::Scraper
     
     wo = doc.css("div.wod-description")
     wo.each do |e|
-      details = e.text.strip 
+      details = e.text.gsub(/\s+/," ")  
       workout.info << details
     end
   end

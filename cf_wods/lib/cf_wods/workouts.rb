@@ -9,7 +9,6 @@ class CfWods::Workouts
     @month = month
     @@all << self
     @info = []
-    #notify month about the workout
     add_to_month
   end
   
